@@ -1,0 +1,81 @@
+<html>
+<head>
+<script type="text/javascript"
+	src="/js/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript"
+	src="/js/jquery-ui-1.8.13.custom.min.js"></script>
+	<link rel="stylesheet"
+	href="/js/jquery-ui-1.8.13.custom.css"
+	type="text/css" media="all" />
+</head>
+<script type="text/javascript">
+
+var x ;
+x=$(document);
+x.ready(inicia);
+
+function inicia(){
+var x;
+
+x = $('#boton');
+x.click(carga_controles);
+
+	
+}
+function carga_controles(){
+
+	
+	$.post("index/controleseditar",$('#form').serialize(),
+	
+			 function(json) {
+			      if(json.status =="ok" ){
+				    $('#carga').html(json.body);
+				  }else if (json.status=="error"){
+					  $('#carga').html(json.body);
+			       }
+			  });
+	  
+}  
+
+</script>
+<body>
+<form id="form" method="<?php echo $this->form->getMethod();?>"  action="<?php echo $this->form->getAction();?>">
+
+<table>
+<tr>
+		<td><?php echo  $this->form->getElement('id');  ?>
+</td>
+	<tr>
+		<td><?php
+echo $this->form->getElement('nombre');
+?></td>
+	</tr>
+	<tr>
+		<td><?php
+echo $this->form->getElement('placa');
+?></td>
+	</tr>
+		<tr>
+		<td><?php
+echo $this->form->getElement('tipo');
+?></td>
+	</tr>
+
+		<tr>
+		<td><?php
+echo $this->form->getElement('Editar');
+?></td>
+	</tr>
+</table>
+<dir id="carga"></dir>
+
+</form>
+
+</body>
+
+
+
+
+
+
+</html>

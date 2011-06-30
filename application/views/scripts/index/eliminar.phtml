@@ -1,0 +1,70 @@
+<html>
+<head>
+<script type="text/javascript"
+	src="/js/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript"
+	src="/js/jquery-ui-1.8.13.custom.min.js"></script>
+	<link rel="stylesheet"
+	href="/js/jquery-ui-1.8.13.custom.css"
+	type="text/css" media="all" />
+</head>
+<script type="text/javascript">
+var x ; 
+x=$(document);
+x.ready(inicia);
+
+function  inicia(){
+
+	var x ;
+	x=$('#boton');
+	x.click(elimina);
+}
+
+function  elimina (){
+
+	//alert("entro a eliminar ");
+	$.post("index/confirmaeliminar",$('#form').serialize(),
+			
+			 function(json) {
+			      if(json.status =="ok" ){
+				    $('#mensaje').html(json.body);
+				  }else if (json.status=="error"){
+					  $('#mensaje').html(json.body);
+			       }
+			  });
+
+	
+}
+
+
+</script>
+<script>
+	$(function() {
+		$( "button", "#controles" ).button();
+		
+	});
+	</script>
+<body>
+
+<form id="form">
+<?php  $controles =  new  Application_Form_eliminar(); ?>
+<div id="controles">
+<center>
+<h1>Eliminar Un Bus</h1>
+<br>
+<?php echo $controles->getElement('nombre'); ?>
+<br>
+<?php echo $controles->getElement('Eliminar'); ?>
+<br>
+</center>
+</div>
+<center>
+</br>
+<div id="mensaje"></div>
+</center>
+</form>
+
+</body>
+
+
+</html>

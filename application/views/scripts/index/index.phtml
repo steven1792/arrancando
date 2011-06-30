@@ -1,0 +1,116 @@
+<html>
+<head>
+<!-- <script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.5.2.js"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+
+<link rel="stylesheet"
+	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css"
+	type="text/css" media="all" /> -->
+	<script type="text/javascript"
+	src="/js/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript"
+	src="/js/jquery-ui-1.8.13.custom.min.js"></script>
+	<link rel="stylesheet"
+	href="/js/jquery-ui-1.8.13.custom.css"
+	type="text/css" media="all" />
+</head>
+<body>
+<script>
+	$(function() {
+		$( "#tabs" ).tabs();
+	});
+	
+	</script>
+
+<script type="text/javascript">
+	var x ;
+    x= $(document);
+	x.ready(inicia);
+
+	function inicia(){
+     var x ;
+     x = $('#tab1');
+     x.click(tab1);
+     x = $('#tab2');
+     x.click(tab2);
+     x = $('#tab3');
+     x.click(tab3);
+     x = $('#tab4');
+     x.click(tab4);
+    
+	}
+	function tab1(){
+	//alert("entro a tab 1 ");	
+
+	$.getJSON("index/mostraragr",
+			 function(json) {
+			      if(json.status =="ok" ){
+				    $('#tabs-1').html(json.body);
+				  }else{
+					  $('#tabs-1').html(json.error);
+			       }
+			  });
+		
+	}
+	function tab2(){
+		//alert("entro a tab 2 ");	
+		$.getJSON("index/muestraeliminar",
+				 function(json) {
+				      if(json.status =="ok" ){
+					    $('#tabs-2').html(json.body);
+					  }else{
+						  $('#tabs-2').html(json.error);
+				       }
+				  });
+			
+		}	
+		
+	function tab3(){
+		//alert("entro a tab 3 ");	
+	    $.getJSON("index/cargaeditar",
+	    	    function(json){
+						if(json.status == "ok"){
+							$('#tabs-3').html(json.body);	
+							}else{
+								$('#tabs-3').html(json.error);
+								}
+    	    			});	
+		}
+	function tab4(){
+		//alert("entro a tab 4 ");	
+		 $.getJSON("index/buses",
+		    	    function(json){
+							if(json.status == "ok"){
+								$('#tabs-4').html(json.body);	
+								}else{
+									$('#tabs-4').html(json.error);
+									}
+	    	    			});		
+		}
+	
+	</script>
+
+
+
+<div class="demo">
+
+<div id="tabs">
+<ul>
+	<li><a href="#tabs-1" id="tab1">Agregar</a></li>
+	<li><a href="#tabs-2" id="tab2">Eliminar</a></li>
+	<li><a href="#tabs-3" id="tab3">Editar</a></li>
+	<li><a href="#tabs-4" id="tab4">Ver Datos</a></li>
+</ul>
+<div id="tabs-1"></div>
+<div id="tabs-2"></div>
+<div id="tabs-3"></div>
+<div id="tabs-4"></div>
+</div>
+
+</div>
+<!-- End demo -->
+</body>
+
+</html>

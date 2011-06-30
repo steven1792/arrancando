@@ -1,0 +1,67 @@
+<html>
+<head>
+<script type="text/javascript"
+	src="/js/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript"
+	src="/js/jquery-ui-1.8.13.custom.min.js"></script>
+	<link rel="stylesheet"
+	href="/js/jquery-ui-1.8.13.custom.css"
+	type="text/css" media="all" />
+</head>
+
+<script type="text/javascript">
+var x ;
+x=$(document);
+x.ready(inicia);
+
+function  inicia (){
+
+	 function displayVals() {
+	      var singleValues = $("#idc").val();
+	      //alert("entra" + singleValues);
+	      $.post("index/editar",$('#formu').serialize(),
+	    			
+					 function(json) {
+					      if(json.status =="ok" ){
+					    	  $('#cargac').html(json.body);
+					    	  
+					    	  
+							//    var  x = json.body;
+						   // alert("entro a controller" );
+						  }else if (json.status=="error"){
+							  $('#cargac').html(json.body);
+					       }
+					  });
+	    }
+
+	    $("select").change(displayVals);
+	    displayVals();
+
+}
+
+
+</script>
+
+
+<body>
+<form id="formu" >
+<center>
+<h1>Editar Un Bus</h1>
+<br>
+
+<table>
+	<tr>
+		<td><?php
+echo $this->form->getElement('idc');
+?></td>
+	</tr>
+
+</table>
+<br>
+
+<div id="cargac"></div>
+</center>
+</form>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<html>
+<head>
+<script type="text/javascript" src="/js/jquery-1.5.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.8.13.custom.min.js"></script>
+<link rel="stylesheet" href="/js/jquery-ui-1.8.13.custom.css"
+	type="text/css" media="all" />
+</head>
+<script type="text/javascript">
+var  x ;
+x=$(document);
+x.ready(carga);
+
+function carga (){
+
+	var x;
+	x=$('#botonsi');
+	x.click(si);
+	x=$('#botonno');
+	x.click(no);
+	
+	
+	
+}
+function si (){
+
+	$.post("index/eliminar",$('#form').serialize(),
+	
+			 function(json) {
+			      if(json.status =="ok" ){
+				    $('#mensaje').html(json.body);
+				  }else if (json.status=="error"){
+					  $('#mensaje').html(json.body);
+			       }
+			  });
+	
+}
+function no (){
+
+	alert("Se ha  cancelado la  eliminacion !!  ");
+		
+	}
+
+
+</script>
+<body>
+<form id="form">
+<?php echo $this->form->getElement('nombre');?>
+<center>confirma que desea eliminar ?
+<table>
+	<tr>
+		<td><?php
+echo $this->form->getElement('si');
+?></td>
+		<td><?php
+echo $this->form->getElement('no');
+?></td>
+	</tr>
+
+</table>
+<br></br>
+<div id="mensaje"></div>
+</center>
+</form>
+</body>
+
+
+
+</html>

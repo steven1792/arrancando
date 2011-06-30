@@ -1,0 +1,14 @@
+<?php
+		$i=1;
+		foreach($this->buses as $buses) : 	
+		$data[$i] =  array($buses->id , $buses->nombre ,$buses->placa ,$buses->tipo);	 
+		
+		 $x[aaData][]=$data[$i];	 
+		endforeach;
+		//	print_r($x);
+		//print_r(json_encode($x));
+	    echo $this->json($x);
+		
+		?> 
+	
+
